@@ -1,0 +1,20 @@
+# Environnements virtuels
+env/
+venv/
+.venv/
+.env/
+
+# Fichiers python compilés
+__pycache__/
+*.pyc
+
+# Base de données
+db.sqlite3
+
+# Fichiers Django
+*.log
+.env
+
+# Fichiers OS
+.DS_Store
+Thumbs.db

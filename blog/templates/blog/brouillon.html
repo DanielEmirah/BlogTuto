@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Brouillon - {{ block.super }}{% endblock %}
+
+{% block content %}
+<h1>Mes Brouillons</h1>
+
+{% if articles %}
+    {% for article in articles %}
+        <article>
+            <h2>
+                <a href="{% url 'blog:details' article.id %}">
+                    {{ article.titre }}
+                </a>
+            </h2>
+            <p class="meta">
+                Par {{ article.auteur.username }} 
+                le {{ article.date_creation|date:"d/m/Y à H:i" }}
+            </p>
+            <p>{{ article.contenu|truncatewords:30 }}</p>
+            
+            {% if article.est_recent %}
+                <span class="badge">Nouveau</span>
+            {% endif %}
+        </article>
+    {% endfor %}
+    
+    {# Pagination #}
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">Première</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Précédente</a>
+            {% endif %}
+            
+            <span>Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}</span>
+            
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Dernière</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% else %}
+    <p>Aucun article pour le moment.</p>
+{% endif %}
+{% endblock %}

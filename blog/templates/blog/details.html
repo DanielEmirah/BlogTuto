@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>{{article.titre}}</h2>
+    <a href="{% url 'blog:modifier' article.id %}">Modifier</a>
+    <a href="{% url 'blog:supprimer' article.id %}">Supprimer</a>
+    <p>Créer le {{article.date_creation|date:"d/m/Y"}} à {{article.date_creation|date:"H:i:s"}}</p>
+    <p>{{article.contenu}}</p>
+    <p>Auteur : {{article.auteur}}</p>
+    <a href="{% url 'blog:liste' %}">< Liste des Articles</a>
+{% endblock %}
